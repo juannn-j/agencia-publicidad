@@ -1,0 +1,113 @@
+CREATE TABLE EMPLEADO (
+    id_emp SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    telefono VARCHAR(20),
+    dni VARCHAR(20),
+    usuario VARCHAR(50),
+    passwd VARCHAR(100)
+);
+
+CREATE TABLE PUBLICIDAD (
+    id_pub SERIAL PRIMARY KEY,
+    desc_pub TEXT,
+    tipo_pub VARCHAR(50),
+    nrocontact INT,
+    image_pub TEXT
+);
+
+CREATE TABLE CLIENTE (
+    id_cli SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    apellido VARCHAR(100),
+    birth_date DATE,
+    telefono VARCHAR(20),
+    direccion TEXT,
+    dni VARCHAR(20),
+    sexo VARCHAR(10),
+    gusto TEXT
+);
+
+CREATE TABLE PUB_EMP_CLI (
+    id_pub_cli SERIAL PRIMARY KEY,
+    fecha DATE,
+    id_emp INT,
+    id_cli INT,
+    id_pub INT,
+    CONSTRAINT fk_pubempcli_empleado FOREIGN KEY (id_emp) REFERENCES EMPLEADO(id_emp),
+    CONSTRAINT fk_pubempcli_cliente FOREIGN KEY (id_cli) REFERENCES CLIENTE(id_cli),
+    CONSTRAINT fk_pubempcli_publicidad FOREIGN KEY (id_pub) REFERENCES PUBLICIDAD(id_pub)
+);
+
+CREATE TABLE CLIENTE_CORREO (
+    id_cli_cor SERIAL PRIMARY KEY,
+    correo_cli VARCHAR(100),
+    prov_cor VARCHAR(50),
+    id_cli INT,
+    CONSTRAINT fk_clientecorreo_cliente FOREIGN KEY (id_cli) REFERENCES CLIENTE(id_cli)
+);
+
+CREATE TABLE CLIENTE_SOCIAL (
+    id_cli_soc SERIAL PRIMARY KEY,
+    user_soc VARCHAR(100),
+    prov_soc VARCHAR(50),
+    id_cli INT,
+    CONSTRAINT fk_clientesocial_cliente FOREIGN KEY (id_cli) REFERENCES CLIENTE(id_cli)
+);
+
+-- Insertar empleados
+INSERT INTO EMPLEADO (nombre, telefono, dni, usuario, passwd) VALUES
+('Lucía Martínez', '987654321', '12345678L', 'lucia.m', 'clave123'),
+('Carlos Pérez', '912345678', '87654321K', 'carlos.p', 'passw0rd');
+
+-- Insertar publicidades
+INSERT INTO PUBLICIDAD (desc_pub, tipo_pub, nrocontact, image_pub) VALUES
+('Publicidad en redes sociales', 'Redes Sociales', 5, 'imagen1.jpg'),
+('Anuncio en radio local', 'Radio', 2, 'imagen2.jpg');
+
+-- Insertar clientes
+INSERT INTO CLIENTE (nombre, apellido, birth_date, telefono, direccion, dni, sexo, gusto) VALUES
+('Ana', 'Gómez', '1990-05-15', '612345678', 'Calle Falsa 123', '11112222A', 'Femenino', 'Moda, tecnología'),
+('Luis', 'Ramírez', '1985-10-20', '698765432', 'Av. Real 456', '33334444B', 'Masculino', 'Deportes, autos');
+
+-- Insertar relaciones PUB_EMP_CLI
+INSERT INTO PUB_EMP_CLI (fecha, id_emp, id_cli, id_pub) VALUES
+('2025-04-01', 1, 1, 1),
+('2025-04-02', 2, 2, 2);
+
+-- Insertar correos de clientes
+INSERT INTO CLIENTE_CORREO (correo_cli, prov_cor, id_cli) VALUES
+('ana.gomez@gmail.com', 'Gmail', 1),
+('luis.ramirez@outlook.com', 'Outlook', 2);
+
+-- Insertar redes sociales de clientes
+INSERT INTO CLIENTE_SOCIAL (user_soc, prov_soc, id_cli) VALUES
+('@ana_g', 'Instagram', 1),
+('@luis_r', 'Facebook', 2);
+
+
+-- Ver anuncios asignados a clientes
+CREATE VIEW pubclientes AS
+SELECT 
+    c.id_cli,
+    c.nombre || ' ' || c.apellido AS cliente,
+     p.id_pub,
+    p.desc_pub AS descripcion_anuncio,
+    p.tipo_pub,
+    pec.fecha
+FROM PUB_EMP_CLI pec
+JOIN CLIENTE c ON pec.id_cli = c.id_cli
+JOIN PUBLICIDAD p ON pec.id_pub = p.id_pub
+ORDER BY c.id_cli, pec.fecha;
+
+-- Ver clientes atendidos por empleados
+CREATE VIEW cliempleados AS
+SELECT 
+    e.id_emp,
+    e.nombre AS empleado,
+    c.id_cli,
+    c.nombre || ' ' || c.apellido AS cliente,
+    pec.fecha
+FROM PUB_EMP_CLI pec
+JOIN EMPLEADO e ON pec.id_emp = e.id_emp
+JOIN CLIENTE c ON pec.id_cli = c.id_cli
+ORDER BY e.id_emp, pec.fecha;
