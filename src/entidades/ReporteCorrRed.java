@@ -1,6 +1,7 @@
 package entidades;
 
 public class ReporteCorrRed {
+	// Mostrar los correos y redes de clientes
 	private int id_cli;
 	private String cliente;
 	private String correos;

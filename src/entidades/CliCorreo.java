@@ -1,6 +1,7 @@
 package entidades;
 
 public class CliCorreo {
+	// entidad para registrar correos
 	private int id_cli_cor;
 	private String correo;
 	private String proveedor;

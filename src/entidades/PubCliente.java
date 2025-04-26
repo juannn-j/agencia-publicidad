@@ -1,6 +1,7 @@
 package entidades;
 
 public class PubCliente {
+	// Entidad para asignar publiciddades a clientes por empleado
 	private int id_pub_cli;
 	private String fecha;
 	private int id_emp;

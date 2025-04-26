@@ -1,6 +1,7 @@
 package entidades;
 
 public class Publicidad {
+	// Entidad para mostrar las publicidades
 	private int id_pub;
 	private String desc_pub;
 	private String tipo_pub;
