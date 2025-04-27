@@ -13,11 +13,9 @@ import entidades.CliSocial;
 import entidades.CliCorreo;
 import interfaces.ICliCorreo;
 import interfaces.ICliSocial;
-import interfaces.ICliente;
 import interfaces.IReporteCorrRed;
 import logica.LCliCorreo;
 import logica.LCliSocial;
-import logica.LCliente;
 import logica.LReporteCorrRed;
 
 import javax.swing.JLabel;
@@ -26,10 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class FCliAsigMedia extends JFrame {
 
