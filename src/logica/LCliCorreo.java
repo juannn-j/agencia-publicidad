@@ -23,6 +23,7 @@ public class LCliCorreo implements ICliCorreo{
 		db=new DB();
 		cn=db.conectar();
 		String sql = "insert into cliente_correo (correo, proveedor, id_cli) values (?,?,?)";
+		ps = cn.prepareStatement(sql);
 		ps.setString(1, clicorreo.getCorreo());
 		ps.setString(2, clicorreo.getProveedor());
 		ps.setInt(3, clicorreo.getId_cli());

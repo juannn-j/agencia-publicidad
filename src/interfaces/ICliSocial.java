@@ -8,7 +8,7 @@ import entidades.CliSocial;
 public interface ICliSocial {
 	void guardar(CliSocial clisocial) throws SQLException;
 	void modificar(CliSocial clisocial) throws SQLException;
-	void borrar(CliSocial clisocial) throws SQLException;
+	void eliminar(String id) throws SQLException;
 	
 	List<CliSocial> cargar() throws SQLException;
 }

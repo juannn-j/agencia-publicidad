@@ -90,7 +90,7 @@ public class LCliente implements ICliente{
 			clientes.add(cli);
 		}
 		cn.close();
-		return clientes ;
+		return clientes;
 	}
 
 }
