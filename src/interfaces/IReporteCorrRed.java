@@ -6,5 +6,5 @@ import java.util.List;
 import entidades.ReporteCorrRed;
 
 public interface IReporteCorrRed {
-	List<ReporteCorrRed> cargar() throws SQLException;
+	List<ReporteCorrRed> cargar(String nombre) throws SQLException;
 }
