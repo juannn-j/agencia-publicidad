@@ -1,5 +1,14 @@
 package interfaces;
 
-public interface ICliSocial {
+import java.sql.SQLException;
+import java.util.List;
 
+import entidades.CliSocial;
+
+public interface ICliSocial {
+	void guardar(CliSocial clisocial) throws SQLException;
+	void modificar(CliSocial clisocial) throws SQLException;
+	void borrar(CliSocial clisocial) throws SQLException;
+	
+	List<CliSocial> cargar() throws SQLException;
 }
