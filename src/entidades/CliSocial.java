@@ -11,7 +11,7 @@ public class CliSocial {
 		super();
 	}
 
-	public CliSocial(int id_cli_soc, String user, String proveedor, int id_cli) {
+	public CliSocial() {
 		super();
 		this.id_cli_soc = id_cli_soc;
 		this.user = user;

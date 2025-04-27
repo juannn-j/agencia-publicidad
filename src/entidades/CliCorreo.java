@@ -11,7 +11,7 @@ public class CliCorreo {
 		super();
 	}
 
-	public CliCorreo(int id_cli_cor, String correo, String proveedor, int id_cli) {
+	public CliCorreo() {
 		super();
 		this.id_cli_cor = id_cli_cor;
 		this.correo = correo;
