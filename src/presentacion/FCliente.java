@@ -221,7 +221,7 @@ public class FCliente extends JFrame {
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
 		
-		// Cargar tabla al iniciar
+		// initialization load table
 		try {
 			cargarClientes();
 		} catch (SQLException e) {
