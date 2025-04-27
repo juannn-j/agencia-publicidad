@@ -22,7 +22,7 @@ public class LCliente implements ICliente{
 		// TODO Auto-generated method stub
 		db=new DB();
 		cn=db.conectar();
-		String sql = "insert into cliente (nombre, apellido, birth_date, telefono, direccion, dni, sexo, gusto) values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into cliente (nombre, apellido, birthdate, telefono, direccion, dni, sexo, gusto) values(?,?,?,?,?,?,?,?)";
 		ps = cn.prepareStatement(sql);
 		ps.setString(1, cliente.getNombre());
 		ps.setString(2, cliente.getApellido());
@@ -41,7 +41,7 @@ public class LCliente implements ICliente{
 		// TODO Auto-generated method stub
 		db=new DB();
 		cn=db.conectar();
-		String sql = "update cliente set nombre=?, apellido=?, birth_date=?, telefono=?, direccion=?, dni=?, sexo=?, gusto=? where id_cli=? ";
+		String sql = "update cliente set nombre=?, apellido=?, birthdate=?, telefono=?, direccion=?, dni=?, sexo=?, gusto=? where id_cli=? ";
 		ps = cn.prepareStatement(sql);
 		ps.setString(1, cliente.getNombre());
 		ps.setString(2, cliente.getApellido());
@@ -73,7 +73,7 @@ public class LCliente implements ICliente{
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		db=new DB();
 		cn=db.conectar();
-		String sql = "select id_cli, nombre, apellido, birth_date, telefono, direccion, dni, sexo, gusto from cliente";
+		String sql = "select id_cli, nombre, apellido, birthdate, telefono, direccion, dni, sexo, gusto from cliente";
 		ps = cn.prepareStatement(sql);
 		rs = ps.executeQuery();
 		while (rs.next()){

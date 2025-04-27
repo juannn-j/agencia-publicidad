@@ -273,7 +273,7 @@ public class FCliente extends JFrame {
 
 	private void cargarClientes() throws SQLException {
 		DefaultTableModel model = new DefaultTableModel(null,
-				new String[]{"ID", "NOMBRE", "APELLIDO", "CORREO", "TELEFONO", "DIRECCION", "DNI", "SEXO", "GUSTO"});
+				new String[]{"ID", "NOMBRE", "APELLIDO", "FECHA DE NACIMIENTO", "TELEFONO", "DIRECCION", "DNI", "SEXO", "GUSTO"});
 		ICliente log = new LCliente();
 		List<Cliente> clientes = log.cargar();
 		for (Cliente cliente : clientes) {

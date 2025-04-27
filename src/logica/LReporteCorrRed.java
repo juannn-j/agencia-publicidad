@@ -18,14 +18,13 @@ public class LReporteCorrRed implements IReporteCorrRed {
 	DB db;
 	
 	@Override
-	public List<ReporteCorrRed> cargar(String nombre) throws SQLException {
+	public List<ReporteCorrRed> cargar() throws SQLException {
 		// TODO Auto-generated method stub
 		List<ReporteCorrRed> repcoreds = new ArrayList<>();
 		db = new DB();
 		cn = db.conectar();
-		String sql = "SELECT * FROM redcorclientes WHERE nombre = ?";
-		ps = cn.prepareStatement(sql);
-		ps.setString(1, nombre); 
+		String sql = "SELECT id_cli, cliente, correos, redes_sociales FROM redcorclientes";
+		ps = cn.prepareStatement(sql); 
 		rs = ps.executeQuery();
 		while (rs.next()) {
 			ReporteCorrRed repcrd = new ReporteCorrRed(

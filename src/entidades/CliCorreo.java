@@ -7,7 +7,7 @@ public class CliCorreo {
 	private String proveedor;
 	private int id_cli;
 	
-	public CliCorreo() {
+	public CliCorreo(int i, String string, String string2, String string3, String string4) {
 		super();
 	}
 
