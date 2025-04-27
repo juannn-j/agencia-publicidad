@@ -8,7 +8,7 @@ import entidades.Cliente;
 public interface ICliente {
 	void guardar(Cliente cliente) throws SQLException;
 	void modificar(Cliente cliente) throws SQLException;
-	void borrar(Cliente cliente) throws SQLException;
+	void eliminar(String id) throws SQLException;
 	
 	List<Cliente> cargar() throws SQLException;
 }
