@@ -66,47 +66,47 @@ public class FCliente extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblID = new JLabel("ID");
-		lblID.setFont(new Font("Iosevka", Font.PLAIN, 18));
+		lblID.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		lblID.setBounds(10, 12, 54, 16);
 		contentPane.add(lblID);
 		
 		JLabel lblNom = new JLabel("Nombres");
-		lblNom.setFont(new Font("Iosevka", Font.PLAIN, 18));
-		lblNom.setBounds(10, 40, 54, 16);
+		lblNom.setFont(new Font("Iosevka", Font.PLAIN, 14));
+		lblNom.setBounds(10, 40, 70, 16);
 		contentPane.add(lblNom);
 		
 		JLabel lblSurN = new JLabel("Apellidos");
-		lblSurN.setFont(new Font("Iosevka", Font.PLAIN, 18));
-		lblSurN.setBounds(10, 68, 54, 16);
+		lblSurN.setFont(new Font("Iosevka", Font.PLAIN, 14));
+		lblSurN.setBounds(10, 68, 70, 16);
 		contentPane.add(lblSurN);
 		
 		JLabel lblBirth = new JLabel("Fecha de nacimiento");
-		lblBirth.setFont(new Font("Iosevka", Font.PLAIN, 18));
-		lblBirth.setBounds(250, 14, 54, 16);
+		lblBirth.setFont(new Font("Iosevka", Font.PLAIN, 14));
+		lblBirth.setBounds(250, 14, 70, 16);
 		contentPane.add(lblBirth);
 		
 		JLabel lblTel = new JLabel("Telefono");
-		lblTel.setFont(new Font("Iosevka", Font.PLAIN, 18));
-		lblTel.setBounds(250, 42, 54, 16);
+		lblTel.setFont(new Font("Iosevka", Font.PLAIN, 14));
+		lblTel.setBounds(250, 42, 70, 16);
 		contentPane.add(lblTel);
 		
 		JLabel lblDirec = new JLabel("Direccion");
-		lblDirec.setFont(new Font("Iosevka", Font.PLAIN, 18));
-		lblDirec.setBounds(250, 72, 54, 16);
+		lblDirec.setFont(new Font("Iosevka", Font.PLAIN, 14));
+		lblDirec.setBounds(250, 72, 70, 16);
 		contentPane.add(lblDirec);
 		
 		JLabel lblDni = new JLabel("Dni");
-		lblDni.setFont(new Font("Iosevka", Font.PLAIN, 18));
+		lblDni.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		lblDni.setBounds(491, 14, 54, 16);
 		contentPane.add(lblDni);
 		
 		JLabel lblSexo = new JLabel("Sexo");
-		lblSexo.setFont(new Font("Iosevka", Font.PLAIN, 18));
+		lblSexo.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		lblSexo.setBounds(491, 42, 54, 16);
 		contentPane.add(lblSexo);
 		
 		JLabel lblGusto = new JLabel("Gusto");
-		lblGusto.setFont(new Font("Iosevka", Font.PLAIN, 18));
+		lblGusto.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		lblGusto.setBounds(491, 70, 54, 16);
 		contentPane.add(lblGusto);
 		
@@ -178,7 +178,7 @@ public class FCliente extends JFrame {
 		});
 		
 		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setFont(new Font("Iosevka", Font.PLAIN, 16));
+		btnGuardar.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnGuardar.setBounds(12, 462, 94, 26);
 		contentPane.add(btnGuardar);
 		btnGuardar.addActionListener(e -> {
@@ -191,7 +191,7 @@ public class FCliente extends JFrame {
 		});
 		
 		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setFont(new Font("Iosevka", Font.PLAIN, 16));
+		btnModificar.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnModificar.setBounds(118, 462, 94, 26);
 		contentPane.add(btnModificar);
 		btnModificar.addActionListener(e -> {
@@ -204,7 +204,7 @@ public class FCliente extends JFrame {
 		});
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setFont(new Font("Iosevka", Font.PLAIN, 16));
+		btnEliminar.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnEliminar.setBounds(224, 462, 94, 26);
 		contentPane.add(btnEliminar);
 		btnEliminar.addActionListener(e -> {
@@ -217,7 +217,7 @@ public class FCliente extends JFrame {
 		});
 		
 		JButton btnAtras = new JButton("Atras");
-		btnAtras.setFont(new Font("Iosevka", Font.PLAIN, 16));
+		btnAtras.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
 		
