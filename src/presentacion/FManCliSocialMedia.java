@@ -29,7 +29,7 @@ import javax.swing.JButton;
 import java.sql.SQLException;
 import java.util.List;
 
-public class FCliAsigMedia extends JFrame {
+public class FManCliSocialMedia extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -50,7 +50,7 @@ public class FCliAsigMedia extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FCliAsigMedia frame = new FCliAsigMedia();
+					FManCliSocialMedia frame = new FManCliSocialMedia();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class FCliAsigMedia extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FCliAsigMedia() {
+	public FManCliSocialMedia() {
 		setTitle("Mantenimiento Correos y Redes Sociales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);

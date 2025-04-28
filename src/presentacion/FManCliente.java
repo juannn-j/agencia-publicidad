@@ -21,7 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
-public class FCliente extends JFrame {
+public class FManCliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -43,7 +43,7 @@ public class FCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FCliente frame = new FCliente();
+					FManCliente frame = new FManCliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +55,7 @@ public class FCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FCliente() {
+	public FManCliente() {
 		setTitle("Mantenimiento de Clientes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 500);
