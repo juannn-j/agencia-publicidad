@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import com.toedter.calendar.JDateChooser;
 
 public class FManCliente extends JFrame {
 
@@ -28,7 +29,6 @@ public class FManCliente extends JFrame {
 	private JTextField txtid;
 	private JTextField txtnombres;
 	private JTextField txtapellidos;
-	private JTextField txtbirthdate;
 	private JTextField txttelefono;
 	private JTextField txtdirec;
 	private JTextField txtdni;
@@ -125,11 +125,6 @@ public class FManCliente extends JFrame {
 		txtapellidos.setBounds(82, 66, 125, 20);
 		contentPane.add(txtapellidos);
 		
-		txtbirthdate = new JTextField();
-		txtbirthdate.setColumns(10);
-		txtbirthdate.setBounds(322, 12, 125, 20);
-		contentPane.add(txtbirthdate);
-		
 		txttelefono = new JTextField();
 		txttelefono.setColumns(10);
 		txttelefono.setBounds(322, 40, 125, 20);
@@ -168,7 +163,6 @@ public class FManCliente extends JFrame {
 				txtid.setText(grilla_clientes.getValueAt(fila, 0).toString());
 				txtnombres.setText(grilla_clientes.getValueAt(fila, 1).toString());
 				txtapellidos.setText(grilla_clientes.getValueAt(fila, 2).toString());
-				txtbirthdate.setText(grilla_clientes.getValueAt(fila, 3).toString());
 				txttelefono.setText(grilla_clientes.getValueAt(fila, 4).toString());
 				txtdirec.setText(grilla_clientes.getValueAt(fila, 5).toString());
 				txtdni.setText(grilla_clientes.getValueAt(fila, 6).toString());
@@ -221,6 +215,10 @@ public class FManCliente extends JFrame {
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
 		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(322, 8, 125, 20);
+		contentPane.add(dateChooser);
+		
 		// initialization load table
 		try {
 			cargarClientes();
@@ -229,32 +227,12 @@ public class FManCliente extends JFrame {
 		}
 	}
 	private void guardarCliente() throws SQLException {
-		Cliente cliente = new Cliente(0,
-				txtid.getText(),
-				txtnombres.getText(),
-				txtapellidos.getText(),
-				txtbirthdate.getText(),
-				txttelefono.getText(),
-				txtdirec.getText(),
-				txtdni.getText(),
-				txtsexo.getText(),
-				txtgusto.getText());
 		ICliente log = new LCliente();
-		log.guardar(cliente);
+		log.guardar(Cliente);
 		JOptionPane.showMessageDialog(null, "Datos guardados");
 	}
 
 	private void modificarCliente() throws SQLException {
-		Cliente cliente = new Cliente(0,
-				txtid.getText(),
-				txtnombres.getText(),
-				txtapellidos.getText(),
-				txtbirthdate.getText(),
-				txttelefono.getText(),
-				txtdirec.getText(),
-				txtdni.getText(),
-				txtsexo.getText(),
-				txtgusto.getText());
 		ICliente log = new LCliente();
 		log.modificar(cliente);
 		JOptionPane.showMessageDialog(null, "Datos modificados");
