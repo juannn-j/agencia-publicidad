@@ -7,11 +7,11 @@ public class CliCorreo {
 	private String proveedor;
 	private int id_cli;
 	
-	public CliCorreo(int i, String string, String string2, String string3, String string4) {
+	public CliCorreo() {
 		super();
 	}
-
-	public CliCorreo() {
+	
+	public CliCorreo(int id_cli_cor, String correo, String proveedor, int id_cli) {
 		super();
 		this.id_cli_cor = id_cli_cor;
 		this.correo = correo;
