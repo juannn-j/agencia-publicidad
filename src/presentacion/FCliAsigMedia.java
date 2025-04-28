@@ -2,6 +2,8 @@ package presentacion;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -169,12 +171,19 @@ public class FCliAsigMedia extends JFrame {
 		btnGuardarC.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnGuardarC.setBounds(12, 156, 94, 26);
 		contentPane.add(btnGuardarC);
-		btnGuardarC.addActionListener(e -> {
-			try {
-				guardarCliCorreo();
-				cargarCliCorreoRedes();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+		btnGuardarC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try { guardarCliCorreo();  cargarCliCorreoRedes(); }
+				catch (SQLException e1) { e1.printStackTrace();}
+			}
+
+			private void guardarCliCorreo() throws SQLException {
+				// TODO Auto-generated method stub
+				CliCorreo clicorreo = new CliCorreo(0, txtcorreoc.getText(), txtprovc.getText(), 0);
+				ICliCorreo log = new LCliCorreo();
+				log.guardar(clicorreo);
+				JOptionPane.showMessageDialog(null, "Datos guardados");
 			}
 		});
 		
@@ -182,12 +191,19 @@ public class FCliAsigMedia extends JFrame {
 		btnModificarC.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnModificarC.setBounds(118, 156, 94, 26);
 		contentPane.add(btnModificarC);
-		btnModificarC.addActionListener(e -> {
-			try {
-				modificarCliCorreo();
-				cargarCliCorreoRedes();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+		btnModificarC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try { modificarCliCorreo(); cargarCliCorreoRedes(); }
+				catch (SQLException e1) { e1.printStackTrace();}
+			}
+
+			private void modificarCliCorreo() throws SQLException {
+				// TODO Auto-generated method stub
+				CliCorreo clicorreo = new CliCorreo(0,txtcorreoc.getText(), txtprovc.getText(),0);
+				ICliCorreo log = new LCliCorreo();
+				log.modificar(clicorreo);
+				JOptionPane.showMessageDialog(null, "Datos modificados");
 			}
 		});
 		
@@ -195,12 +211,24 @@ public class FCliAsigMedia extends JFrame {
 		btnEliminarC.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnEliminarC.setBounds(224, 156, 94, 26);
 		contentPane.add(btnEliminarC);
-		btnEliminarC.addActionListener(e -> {
-			try {
-				eliminarCliCorreo();
-				cargarCliCorreoRedes();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+		btnEliminarC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try { eliminarCliCorreo(); cargarCliCorreoRedes(); }
+				catch (SQLException e1) { e1.printStackTrace();}
+			}
+
+			private void eliminarCliCorreo() throws SQLException {
+				// TODO Auto-generated method stub
+				String id = txtidclic.getText();
+				if (id.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Seleccione para eliminar.");
+					return;
+				}
+				ICliCorreo log = new LCliCorreo();
+				log.eliminar(id);
+				JOptionPane.showMessageDialog(null, "Eliminado");
+
 			}
 		});
 		
@@ -213,12 +241,23 @@ public class FCliAsigMedia extends JFrame {
 		btnEliminarR.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnEliminarR.setBounds(594, 156, 94, 26);
 		contentPane.add(btnEliminarR);
-		btnEliminarR.addActionListener(e -> {
-			try {
-				eliminarCliRed();
-				cargarCliCorreoRedes();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+		btnEliminarR.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try { eliminarCliSocial(); cargarCliCorreoRedes(); }
+				catch (SQLException e1) { e1.printStackTrace();}
+			}
+
+			private void eliminarCliSocial() throws SQLException {
+				// TODO Auto-generated method stub
+				String id = txtidr.getText();
+				if (id.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Seleccione para eliminar.");
+					return;
+				}
+				ICliSocial log = new LCliSocial();
+				log.eliminar(id);
+				JOptionPane.showMessageDialog(null, "Datos eliminados");
 			}
 		});
 		
@@ -226,12 +265,19 @@ public class FCliAsigMedia extends JFrame {
 		btnModificarR.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnModificarR.setBounds(488, 156, 94, 26);
 		contentPane.add(btnModificarR);
-		btnModificarR.addActionListener(e -> {
-			try {
-				modificarCliRed();
-				cargarCliCorreoRedes();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+		btnModificarR.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try { modificarCliSocial(); cargarCliCorreoRedes(); }
+				catch (SQLException e1) { e1.printStackTrace();}
+			}
+
+			private void modificarCliSocial() throws SQLException {
+				// TODO Auto-generated method stub
+				CliSocial clisocial = new CliSocial(0,txtuserr.getText(),txtprovr.getText(),0);
+				ICliSocial log = new LCliSocial();
+				log.modificar(clisocial);
+				JOptionPane.showMessageDialog(null, "Datos guardados");
 			}
 		});
 		
@@ -239,12 +285,19 @@ public class FCliAsigMedia extends JFrame {
 		btnGuardarR.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnGuardarR.setBounds(382, 156, 94, 26);
 		contentPane.add(btnGuardarR);
-		btnGuardarC.addActionListener(e -> {
-			try {
-				guardarCliRed();
-				cargarCliCorreoRedes();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+		btnGuardarR.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try { guardarCliSocial(); cargarCliCorreoRedes(); }
+				catch (SQLException e1) { e1.printStackTrace();}
+			}
+
+			private void guardarCliSocial() throws SQLException {
+				// TODO Auto-generated method stub
+				CliSocial clisocial = new CliSocial(0,txtuserr.getText(),txtprovr.getText(), 0);
+				ICliSocial log = new LCliSocial();
+				log.guardar(clisocial);
+				JOptionPane.showMessageDialog(null, "Datos guardados");
 			}
 		});
 		
@@ -256,82 +309,6 @@ public class FCliAsigMedia extends JFrame {
 		}
 	}
 	
-	private void guardarCliRed() throws SQLException {
-		// TODO Auto-generated method stub
-		CliSocial clisocial = new CliSocial(0,
-				txtidr.getText(),
-				txtuserr.getText(),
-				txtprovr.getText(),
-				txtidclir.getText()
-				);
-		ICliSocial log = new LCliSocial();
-		log.guardar(clisocial);
-		JOptionPane.showMessageDialog(null, "Datos guardados");
-	}
-
-	private void modificarCliRed() throws SQLException {
-		// TODO Auto-generated method stub
-		CliSocial clisocial = new CliSocial(0,
-				txtidr.getText(),
-				txtuserr.getText(),
-				txtprovr.getText(),
-				txtidclir.getText()
-				);
-		ICliSocial log = new LCliSocial();
-		log.modificar(clisocial);
-		JOptionPane.showMessageDialog(null, "Datos modificados");
-	}
-
-	private void eliminarCliRed() throws SQLException {
-		// TODO Auto-generated method stub
-		String id = txtidr.getText();
-		if (id.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Seleccione para eliminar.");
-			return;
-		}
-		ICliSocial log = new LCliSocial();
-		log.eliminar(id);
-		JOptionPane.showMessageDialog(null, "Eliminado");
-	}
-
-	private void eliminarCliCorreo() throws SQLException {
-		// TODO Auto-generated method stub
-		String id = txtidc.getText();
-		if (id.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Seleccione para eliminar.");
-			return;
-		}
-		ICliCorreo log = new LCliCorreo();
-		log.eliminar(id);
-		JOptionPane.showMessageDialog(null, "Eliminado");
-	}
-
-	private void modificarCliCorreo() throws SQLException {
-		// TODO Auto-generated method stub
-		CliCorreo clicorreo = new CliCorreo(0,
-				txtidc.getText(),
-				txtcorreoc.getText(),
-				txtprovc.getText(),
-				txtidclic.getText()
-				);
-		ICliCorreo log = new LCliCorreo();
-		log.modificar(clicorreo);
-		JOptionPane.showMessageDialog(null, "Modificado");
-	}
-
-	private void guardarCliCorreo() throws SQLException {
-		// TODO Auto-generated method stub
-		CliCorreo clicorreo = new CliCorreo(0,
-				txtidc.getText(),
-				txtcorreoc.getText(),
-				txtprovc.getText(),
-				txtidclic.getText()
-				);
-		ICliCorreo log = new LCliCorreo();
-		log.guardar(clicorreo);
-		JOptionPane.showMessageDialog(null, "Guardado");
-	}
-
 	private void cargarCliCorreoRedes() throws SQLException {
 		// TODO Auto-generated method stub
 		DefaultTableModel model = new DefaultTableModel(null,

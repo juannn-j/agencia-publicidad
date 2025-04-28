@@ -7,11 +7,11 @@ public class CliSocial {
 	private String proveedor;
 	private int id_cli;
 	
-	public CliSocial(int i, String string, String string2, String string3, String string4) {
+	public CliSocial() {
 		super();
 	}
 
-	public CliSocial() {
+	public CliSocial(int id_cli_soc, String user, String proveedor, int id_cli) {
 		super();
 		this.id_cli_soc = id_cli_soc;
 		this.user = user;
