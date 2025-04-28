@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -12,17 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import entidades.CliCorreo;
 import entidades.Cliente2;
 import entidades.PubCliente;
 import entidades.Publicidad;
 import entidades.ReportePubCli;
-import interfaces.ICliCorreo;
 import interfaces.ICliente2;
 import interfaces.IPubCliente;
 import interfaces.IPublicidad;
 import interfaces.IReportePubCli;
-import logica.LCliCorreo;
 import logica.LCliente2;
 import logica.LPubCliente;
 import logica.LPublicidad;
