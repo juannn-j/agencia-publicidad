@@ -1,11 +1,35 @@
 package presentacion;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import entidades.CliCorreo;
+import entidades.Cliente2;
+import entidades.PubCliente;
+import entidades.Publicidad;
+import entidades.ReportePubCli;
+import interfaces.ICliCorreo;
+import interfaces.ICliente2;
+import interfaces.IPubCliente;
+import interfaces.IPublicidad;
+import interfaces.IReportePubCli;
+import logica.LCliCorreo;
+import logica.LCliente2;
+import logica.LPubCliente;
+import logica.LPublicidad;
+import logica.LReportePubCli;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -107,18 +131,18 @@ public class FManPublicidad extends JFrame {
 		contentPane.add(lblClientes);
 		
 		JLabel lblPublicidades = new JLabel("Publicidades");
-		lblPublicidades.setBounds(448, 12, 148, 16);
+		lblPublicidades.setBounds(369, 12, 148, 16);
 		contentPane.add(lblPublicidades);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(182, 40, 240, 130);
+		scrollPane.setBounds(182, 40, 175, 130);
 		contentPane.add(scrollPane);
 		
 		grilla_clientes = new JTable();
 		scrollPane.setViewportView(grilla_clientes);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(448, 40, 240, 130);
+		scrollPane_1.setBounds(369, 40, 319, 130);
 		contentPane.add(scrollPane_1);
 		
 		grilla_publicidades = new JTable();
@@ -134,17 +158,123 @@ public class FManPublicidad extends JFrame {
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.setBounds(12, 180, 94, 26);
 		contentPane.add(btnGuardar);
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try { guardarPubEmpCli();  CargarPubCli(); }
+				catch (SQLException e1) { e1.printStackTrace();}
+			}
+
+			private void guardarPubEmpCli() throws SQLException {
+				// TODO Auto-generated method stub
+				PubCliente pubcliente = new PubCliente(0, txtfecha.getText(), 0,0,0);
+				IPubCliente log = new LPubCliente();
+				log.guardar(pubcliente);
+				JOptionPane.showMessageDialog(null, "Datos guardados");
+			}
+		});
 		
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.setBounds(118, 180, 94, 26);
 		contentPane.add(btnModificar);
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try { modificarPubEmpCli();  CargarPubCli(); }
+				catch (SQLException e1) { e1.printStackTrace();}
+			}
+
+			private void modificarPubEmpCli() throws SQLException {
+				// TODO Auto-generated method stub
+				PubCliente pubcliente = new PubCliente(0, txtfecha.getText(), 0,0,0);
+				IPubCliente log = new LPubCliente();
+				log.guardar(pubcliente);
+				JOptionPane.showMessageDialog(null, "Datos modificados");
+			}
+		});
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(224, 180, 94, 26);
 		contentPane.add(btnEliminar);
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try { eliminarPubEmpCli(); CargarPubCli();; }
+				catch (SQLException e1) { e1.printStackTrace();}
+			}
+
+			private void eliminarPubEmpCli() throws SQLException {
+				// TODO Auto-generated method stub
+				String id = txtid.getText();
+				if (id.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Seleccione para eliminar.");
+					return;
+				}
+				IPubCliente log = new LPubCliente();
+				log.eliminar(id);
+				JOptionPane.showMessageDialog(null, "Eliminado");
+
+			}
+		});
 		
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
+		
+		try { CargarPubCli(); CargarClientes2(); CargarPublicidades(); } 
+		catch (SQLException e) { e.printStackTrace(); }
+	}
+	
+	private void CargarPubCli() throws SQLException {
+		DefaultTableModel model = new DefaultTableModel(null,
+				new String[] { "CLIENTE ID", "CLIENTE", "PUB ID", "DESCRIPCION", "TIPO", "FECHA" });
+		IReportePubCli log = new LReportePubCli();
+		List<ReportePubCli> reppubclis = log.cargar();
+		for (ReportePubCli reppbcs : reppubclis) {
+			model.addRow(new Object[] {
+					reppbcs.getId_cli(),
+					reppbcs.getNombre_cli(),
+					reppbcs.getId_pub(),
+					reppbcs.getDesc_pub(),
+					reppbcs.getTipo_pub(),
+					reppbcs.getFecha(),
+			});
+		}
+		grilla_asigpubs.setModel(model);
+		
+	}
+	
+	private void CargarClientes2() throws SQLException {
+		DefaultTableModel model = new DefaultTableModel(null,
+				new String[] { "ID", "NOMBRE", "PREFERENCIAS" });
+		ICliente2 log = new LCliente2();
+		List<Cliente2> clientes2 = log.cargar();
+		for (Cliente2 cli2 : clientes2) {
+			model.addRow(new Object[] {
+					cli2.getId_cli(),
+					cli2.getNombre(),
+					cli2.getGusto()
+			});
+		}
+		grilla_clientes.setModel(model);
+		
+	}
+	
+	private void CargarPublicidades() throws SQLException {
+		DefaultTableModel model = new DefaultTableModel(null,
+				new String[] { "ID", "DESC", "TIPO", "TELEFONO", "IMAGEN" });
+		IPublicidad log = new LPublicidad();
+		List<Publicidad> publicidades = log.cargar();
+		for (Publicidad pbss : publicidades) {
+			model.addRow(new Object[] {
+				pbss.getId_pub(),
+				pbss.getDesc_pub(),
+				pbss.getTipo_pub(),
+				pbss.getTelefono(),
+				pbss.getImage_pub()
+			});
+		}
+		grilla_publicidades.setModel(model);
+		
 	}
 }
