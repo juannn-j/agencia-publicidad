@@ -1,10 +1,21 @@
 package presentacion;
 
 import java.awt.EventQueue;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import entidades.ReporteEmpCli;
+import entidades.ReportePubCli;
+import interfaces.IReporteEmpCli;
+import interfaces.IReportePubCli;
+import logica.LReporteEmpCli;
+import logica.LReportePubCli;
+
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -92,5 +103,46 @@ public class FReportesClientes extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
+		
+		try { CargarPubCli(); CargarEmpCli(); CargarPubCli(); } 
+		catch (SQLException e) { e.printStackTrace(); }
+	}
+	
+	private void CargarEmpCli() throws SQLException {
+		// TODO Auto-generated method stub
+		DefaultTableModel model = new DefaultTableModel(null,
+				new String[] { "EMP ID", "EMPLEADO", "CLIENTE ID", "CLIENTE", "FECHA" });
+		IReporteEmpCli log = new LReporteEmpCli();
+		List<ReporteEmpCli> repempclis = log.cargar();
+		for (ReporteEmpCli repemcli : repempclis) {
+			model.addRow(new Object[] {
+					repemcli.getId_emp(),
+					repemcli.getNombre_emp(),
+					repemcli.getId_cli(),
+					repemcli.getNombre_cli(),
+					repemcli.getFecha(),
+					
+			});
+		}
+		grilla_empcli.setModel(model);
+	}
+
+	private void CargarPubCli() throws SQLException {
+		DefaultTableModel model = new DefaultTableModel(null,
+				new String[] { "CLIENTE ID", "CLIENTE", "PUB ID", "DESCRIPCION", "TIPO", "FECHA" });
+		IReportePubCli log = new LReportePubCli();
+		List<ReportePubCli> reppubclis = log.cargar();
+		for (ReportePubCli reppbcs : reppubclis) {
+			model.addRow(new Object[] {
+					reppbcs.getId_cli(),
+					reppbcs.getNombre_cli(),
+					reppbcs.getId_pub(),
+					reppbcs.getDesc_pub(),
+					reppbcs.getTipo_pub(),
+					reppbcs.getFecha(),
+			});
+		}
+		grilla_pubcli.setModel(model);
+		
 	}
 }
