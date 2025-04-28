@@ -9,13 +9,16 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JTable;
 
 public class FReportesClientes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtempclinom;
+	private JTextField txtpubclinom;
+	private JTable grilla_empcli;
+	private JTable grilla_pubcli;
 
 	/**
 	 * Launch the application.
@@ -55,30 +58,39 @@ public class FReportesClientes extends JFrame {
 		contentPane.add(lblPublicidadesXCliente);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 68, 332, 420);
+		scrollPane.setBounds(12, 68, 332, 373);
 		contentPane.add(scrollPane);
 		
+		grilla_empcli = new JTable();
+		scrollPane.setViewportView(grilla_empcli);
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(356, 68, 332, 420);
+		scrollPane_1.setBounds(356, 68, 332, 373);
 		contentPane.add(scrollPane_1);
 		
-		textField = new JTextField();
-		textField.setBounds(12, 36, 64, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		grilla_pubcli = new JTable();
+		scrollPane_1.setViewportView(grilla_pubcli);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(88, 30, 94, 26);
-		contentPane.add(btnNewButton);
+		txtempclinom = new JTextField();
+		txtempclinom.setBounds(12, 36, 64, 20);
+		contentPane.add(txtempclinom);
+		txtempclinom.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(356, 36, 64, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		JButton btnselectemp = new JButton("Select");
+		btnselectemp.setBounds(88, 30, 94, 26);
+		contentPane.add(btnselectemp);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(432, 30, 94, 26);
-		contentPane.add(btnNewButton_1);
+		txtpubclinom = new JTextField();
+		txtpubclinom.setBounds(356, 36, 64, 20);
+		contentPane.add(txtpubclinom);
+		txtpubclinom.setColumns(10);
+		
+		JButton btnselectpub = new JButton("Select");
+		btnselectpub.setBounds(432, 30, 94, 26);
+		contentPane.add(btnselectpub);
+		
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.setBounds(594, 462, 94, 26);
+		contentPane.add(btnAtras);
 	}
-
 }
