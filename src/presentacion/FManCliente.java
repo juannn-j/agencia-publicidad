@@ -35,6 +35,7 @@ public class FManCliente extends JFrame {
 	private JTextField txtsexo;
 	private JTextField txtgusto;
 	private JTable grilla_clientes;
+	private JDateChooser dcbirthdate;
 
 	/**
 	 * Launch the application.
@@ -215,9 +216,9 @@ public class FManCliente extends JFrame {
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(322, 8, 125, 20);
-		contentPane.add(dateChooser);
+		dcbirthdate = new JDateChooser();
+		dcbirthdate.setBounds(322, 8, 125, 20);
+		contentPane.add(dcbirthdate);
 		
 		// initialization load table
 		try {
