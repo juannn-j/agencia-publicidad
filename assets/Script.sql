@@ -106,10 +106,14 @@ SELECT
     e.nombre AS empleado,
     c.id_cli,
     c.nombre || ' ' || c.apellido AS cliente,
+    p.id_pub,
+    p.descp AS descripcion_anuncio,
+    p.tipo AS tipo_publicidad,
     pec.fecha
 FROM PUB_EMP_CLI pec
 JOIN EMPLEADO e ON pec.id_emp = e.id_emp
 JOIN CLIENTE c ON pec.id_cli = c.id_cli
+JOIN PUBLICIDAD p ON pec.id_pub = p.id_pub
 ORDER BY e.id_emp, pec.fecha;
 
 -- Ver las redes sociales y correos de los clientes
