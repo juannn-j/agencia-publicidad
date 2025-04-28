@@ -93,4 +93,8 @@ public class FMenu extends JFrame {
 		btnMantReporte.setBounds(402, 222, 146, 54);
 		contentPane.add(btnMantReporte);
 	}
+
+	public FMenu(int idEmpleado, String nombreEmpleado) {
+		// TODO Auto-generated constructor stub
+	}
 }
