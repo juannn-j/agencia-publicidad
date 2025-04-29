@@ -114,16 +114,17 @@ JOIN PUBLICIDAD p ON pec.id_pub = p.id_pub
 ORDER BY c.id_cli, pec.fecha;
 
 -- Ver clientes atendidos por empleados
-CREATE VIEW cliempleados AS
+CREATE or replace VIEW cli_empleados AS
 SELECT 
     e.id_emp,
     e.nombre AS empleado,
     c.id_cli,
-    c.nombre || ' ' || c.apellido AS cliente,
+    c.nombre as cliente,
     pec.fecha
 FROM PUB_EMP_CLI pec
 JOIN EMPLEADO e ON pec.id_emp = e.id_emp
 JOIN CLIENTE c ON pec.id_cli = c.id_cli
+JOIN PUBLICIDAD p ON pec.id_pub = p.id_pub
 ORDER BY e.id_emp, pec.fecha;
 
 -- Ver las redes sociales y correos de los clientes
@@ -145,19 +146,3 @@ LEFT JOIN (
     GROUP BY id_cli
 ) redes ON c.id_cli = redes.id_cli
 ORDER BY c.id_cli;
-
-CREATE VIEW cliempleados AS
-SELECT 
-    e.id_emp,
-    e.nombre AS empleado,
-    c.id_cli,
-    c.nombre || ' ' || c.apellido AS cliente,
-    p.id_pub,
-    p.descp AS descripcion_anuncio,
-    p.tipo AS tipo_publicidad,
-    pec.fecha
-FROM PUB_EMP_CLI pec
-JOIN EMPLEADO e ON pec.id_emp = e.id_emp
-JOIN CLIENTE c ON pec.id_cli = c.id_cli
-JOIN PUBLICIDAD p ON pec.id_pub = p.id_pub
-ORDER BY e.id_emp, pec.fecha;
