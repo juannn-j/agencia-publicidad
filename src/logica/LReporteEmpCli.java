@@ -23,7 +23,7 @@ public class LReporteEmpCli implements IReporteEmpCli {
 		List<ReporteEmpCli> repempclis = new ArrayList<>();
 		db = new DB();
 		cn = db.conectar();
-		String sql = "SELECT * FROM cliempleados  WHERE empleado=?";
+		String sql = "SELECT * FROM cli_empleados WHERE empleado=?";
 		ps = cn.prepareStatement(sql); 
 		ps.setString(1,nombre_emp);
 		rs = ps.executeQuery();
