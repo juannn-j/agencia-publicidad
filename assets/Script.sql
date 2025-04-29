@@ -60,6 +60,8 @@ INSERT INTO EMPLEADO (nombre, telefono, dni, usuario, passwd) VALUES
 ('Lucía Martínez', '987654321', '12345678L', 'lucia.m', 'clave123'),
 ('Carlos Pérez', '912345678', '87654321K', 'carlos.p', 'passw0rd');
 
+SELECT * from empleado;
+
 -- Insertar publicidades
 INSERT INTO PUBLICIDAD (descp, tipo, contacto, imagen) VALUES
 ('Publicidad en redes sociales', 'Redes Sociales', 5, 'imagen1.jpg'),
@@ -99,6 +101,19 @@ JOIN CLIENTE c ON pec.id_cli = c.id_cli
 JOIN PUBLICIDAD p ON pec.id_pub = p.id_pub
 ORDER BY c.id_cli, pec.fecha;
 
+CREATE VIEW pubclientes2 AS
+SELECT 
+    c.id_cli,
+    c.nombre AS cliente,
+    p.id_pub,
+    p.descp AS descripcion_anuncio,
+    p.tipo,
+    pec.fecha
+FROM PUB_EMP_CLI pec
+JOIN CLIENTE c ON pec.id_cli = c.id_cli
+JOIN PUBLICIDAD p ON pec.id_pub = p.id_pub
+ORDER BY c.id_cli, pec.fecha;
+
 -- Ver clientes atendidos por empleados
 CREATE VIEW cliempleados AS
 SELECT 
@@ -106,14 +121,10 @@ SELECT
     e.nombre AS empleado,
     c.id_cli,
     c.nombre || ' ' || c.apellido AS cliente,
-    p.id_pub,
-    p.descp AS descripcion_anuncio,
-    p.tipo AS tipo_publicidad,
     pec.fecha
 FROM PUB_EMP_CLI pec
 JOIN EMPLEADO e ON pec.id_emp = e.id_emp
 JOIN CLIENTE c ON pec.id_cli = c.id_cli
-JOIN PUBLICIDAD p ON pec.id_pub = p.id_pub
 ORDER BY e.id_emp, pec.fecha;
 
 -- Ver las redes sociales y correos de los clientes
@@ -136,3 +147,18 @@ LEFT JOIN (
 ) redes ON c.id_cli = redes.id_cli
 ORDER BY c.id_cli;
 
+CREATE VIEW cliempleados AS
+SELECT 
+    e.id_emp,
+    e.nombre AS empleado,
+    c.id_cli,
+    c.nombre || ' ' || c.apellido AS cliente,
+    p.id_pub,
+    p.descp AS descripcion_anuncio,
+    p.tipo AS tipo_publicidad,
+    pec.fecha
+FROM PUB_EMP_CLI pec
+JOIN EMPLEADO e ON pec.id_emp = e.id_emp
+JOIN CLIENTE c ON pec.id_cli = c.id_cli
+JOIN PUBLICIDAD p ON pec.id_pub = p.id_pub
+ORDER BY e.id_emp, pec.fecha;
