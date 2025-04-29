@@ -3,6 +3,7 @@ package entidades;
 public class ReportePubCli {
 	// reporte dinamico para mostrar las publicidades 
 	// asignadas a clientes, y busqueda por cliente
+	private int id_pub_emp_cli;
 	private int id_cli;
 	private String nombre_cli;
 	private int id_pub;
@@ -14,14 +15,23 @@ public class ReportePubCli {
 		super();
 	}
 
-	public ReportePubCli(int id_cli, String nombre_cli, int id_pub, String desc_pub, String tipo_pub, String fecha) {
+	public ReportePubCli(int id_pub_emp_cli, int id_cli, String nombre_cli, int id_pub, String desc_pub, String tipo_pub, String fecha) {
 		super();
+		this.id_pub_emp_cli = id_pub_emp_cli;
 		this.id_cli = id_cli;
 		this.nombre_cli = nombre_cli;
 		this.id_pub = id_pub;
 		this.desc_pub = desc_pub;
 		this.tipo_pub = tipo_pub;
 		this.fecha = fecha;
+	}
+
+	public int getId_pub_emp_cli() {
+		return id_pub_emp_cli;
+	}
+
+	public void setId_pub_emp_cli(int id_pub_emp_cli) {
+		this.id_pub_emp_cli = id_pub_emp_cli;
 	}
 
 	public int getId_cli() {

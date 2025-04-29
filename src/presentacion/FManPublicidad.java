@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -155,6 +156,26 @@ public class FManPublicidad extends JFrame {
 		grilla_asigpubs = new JTable();
 		scrollPane_2.setViewportView(grilla_asigpubs);
 		
+		// Escuchar selección de cliente
+		grilla_clientes.getSelectionModel().addListSelectionListener(e -> {
+			if (!e.getValueIsAdjusting() && grilla_clientes.getSelectedRow() != -1) {
+				int fila = grilla_clientes.getSelectedRow();
+				String idCliente = grilla_clientes.getValueAt(fila, 0).toString();
+				txtcli.setText(idCliente);
+			}
+		});
+
+		// Escuchar selección de publicidad
+		grilla_publicidades.getSelectionModel().addListSelectionListener(e -> {
+			if (!e.getValueIsAdjusting() && grilla_publicidades.getSelectedRow() != -1) {
+				int fila = grilla_publicidades.getSelectedRow();
+				String idPublicidad = grilla_publicidades.getValueAt(fila, 0).toString();
+				txtpub.setText(idPublicidad);
+			}
+		});
+
+		
+		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.setBounds(12, 180, 94, 26);
 		contentPane.add(btnGuardar);
@@ -165,35 +186,99 @@ public class FManPublicidad extends JFrame {
 				catch (SQLException e1) { e1.printStackTrace();}
 			}
 
-			private void guardarPubEmpCli() throws SQLException {
-				// TODO Auto-generated method stub
-				String fechaStr = new SimpleDateFormat("yyyy-MM-dd").format(dcfecha.getDate());
-				PubCliente pubcliente = new PubCliente(0, fechaStr, 0, 0, 0);
-				IPubCliente log = new LPubCliente();
-				log.guardar(pubcliente);
-				JOptionPane.showMessageDialog(null, "Datos guardados");
+			private void guardarPubEmpCli() {
+			    if (!txtid.getText().trim().isEmpty()) {
+			        JOptionPane.showMessageDialog(null,
+			            "El campo ID se autogenera. Déjalo vacío.",
+			            "Aviso",
+			            JOptionPane.INFORMATION_MESSAGE);
+			        txtid.setText("");
+			        return;
+			    }
+
+			    // Verificación de entrada
+			    int id_emp, id_cli, id_pub;
+			    Date fecha = dcfecha.getDate();
+
+			    try {
+			        id_emp = Integer.parseInt(txtemp.getText().trim());
+			        id_cli = Integer.parseInt(txtcli.getText().trim());
+			        id_pub = Integer.parseInt(txtpub.getText().trim());
+
+			        if (fecha == null) {
+			            JOptionPane.showMessageDialog(null, "Debes seleccionar una fecha.");
+			            return;
+			        }
+			    } catch (NumberFormatException e) {
+			        JOptionPane.showMessageDialog(null, "IDs inválidos. Verifica que todos los campos contengan números enteros.");
+			        return;
+			    }
+
+			    PubCliente clip = new PubCliente();
+			    clip.setId_emp(Integer.parseInt(txtemp.getText().trim()));
+			    clip.setId_cli(Integer.parseInt(txtcli.getText().trim()));
+			    clip.setId_pub(Integer.parseInt(txtpub.getText().trim()));
+			    if (clip.getId_emp() <= 0 || clip.getId_cli() <= 0 || clip.getId_pub() <= 0) {
+			        JOptionPane.showMessageDialog(null, "Debes seleccionar correctamente un empleado, cliente y publicidad.");
+			        return; // evita continuar
+			    }
+
+			    clip.setFecha(fecha);
+
+			    try {
+			        IPubCliente log = new LPubCliente();
+			        log.guardar(clip);
+			        JOptionPane.showMessageDialog(null, "Datos guardados exitosamente.");
+			    } catch (SQLException e) {
+			        JOptionPane.showMessageDialog(null, "Error al guardar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			        e.printStackTrace(); // Para depuración en consola
+			    }
 			}
+
 		});
 		
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.setBounds(118, 180, 94, 26);
 		contentPane.add(btnModificar);
-		btnGuardar.addActionListener(new ActionListener() {
+		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				try { modificarPubEmpCli();  CargarPubCli(); }
-				catch (SQLException e1) { e1.printStackTrace();}
+				try {
+					modificarPubEmpCli();
+					CargarPubCli();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
 			}
 
 			private void modificarPubEmpCli() throws SQLException {
-				// TODO Auto-generated method stub
-				String fechaStr = new SimpleDateFormat("yyyy-MM-dd").format(dcfecha.getDate());
-				PubCliente pubcliente = new PubCliente(0, fechaStr, 0, 0, 0);
+				int id_emp, id_cli, id_pub;
+
+				try {
+					id_emp = Integer.parseInt(txtemp.getText().trim());
+					id_cli = Integer.parseInt(txtcli.getText().trim());
+					id_pub = Integer.parseInt(txtpub.getText().trim());
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "IDs inválidos. Verifica que todos los campos contengan números enteros.");
+					return;
+				}
+
+				if (id_emp <= 0 || id_cli <= 0 || id_pub <= 0) {
+					JOptionPane.showMessageDialog(null, "IDs no pueden ser cero o negativos.");
+					return;
+				}
+
+				PubCliente clip = new PubCliente();
+				clip.setId_emp(id_emp);
+				clip.setId_cli(id_cli);
+				clip.setId_pub(id_pub);
+				clip.setFecha(dcfecha.getDate());
+
 				IPubCliente log = new LPubCliente();
-				log.guardar(pubcliente);
-				JOptionPane.showMessageDialog(null, "Datos modificados");
+				log.modificar(clip); // Asegúrate de que exista este método
+				JOptionPane.showMessageDialog(null, "Datos modificados correctamente.");
 			}
 		});
+
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(224, 180, 94, 26);
@@ -239,11 +324,12 @@ public class FManPublicidad extends JFrame {
 	
 	private void CargarPubCli() throws SQLException {
 		DefaultTableModel model = new DefaultTableModel(null,
-				new String[] { "CLIENTE ID", "CLIENTE", "PUB ID", "DESCRIPCION", "TIPO", "FECHA" });
+				new String[] { "ASIG ID", "CLIENTE ID", "CLIENTE", "PUB ID", "DESCRIPCION", "TIPO", "FECHA" });
 		IReportePubCli log = new LReportePubCli();
 		List<ReportePubCli> reppubclis = log.cargar();
 		for (ReportePubCli reppbcs : reppubclis) {
 			model.addRow(new Object[] {
+					reppbcs.getId_pub_emp_cli(),
 					reppbcs.getId_cli(),
 					reppbcs.getNombre_cli(),
 					reppbcs.getId_pub(),

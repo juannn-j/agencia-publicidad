@@ -1,9 +1,11 @@
 package entidades;
 
+import java.util.Date;
+
 public class PubCliente {
 	// Entidad para asignar publiciddades a clientes por empleado
 	private int id_pub_cli;
-	private String fecha;
+	private Date fecha;
 	private int id_emp;
 	private int id_cli;
 	private int id_pub;
@@ -12,7 +14,7 @@ public class PubCliente {
 		super();
 	}
 
-	public PubCliente(int id_pub_cli, String fecha, int id_emp, int id_cli, int id_pub) {
+	public PubCliente(int id_pub_cli, Date fecha, int id_emp, int id_cli, int id_pub) {
 		super();
 		this.id_pub_cli = id_pub_cli;
 		this.fecha = fecha;
@@ -29,11 +31,11 @@ public class PubCliente {
 		this.id_pub_cli = id_pub_cli;
 	}
 
-	public String getFecha() {
+	public java.util.Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(java.util.Date fecha) {
 		this.fecha = fecha;
 	}
 

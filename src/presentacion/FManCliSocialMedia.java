@@ -179,7 +179,8 @@ public class FManCliSocialMedia extends JFrame {
 			}
 
 			private void guardarCliCorreo() throws SQLException {
-				// TODO Auto-generated method stub
+				if (!verificarCampoIdVacio(txtidc)) return;
+
 				CliCorreo clicorreo = new CliCorreo(0, txtcorreoc.getText(), txtprovc.getText(), 0);
 				ICliCorreo log = new LCliCorreo();
 				log.guardar(clicorreo);
@@ -303,12 +304,14 @@ public class FManCliSocialMedia extends JFrame {
 			}
 
 			private void guardarCliSocial() throws SQLException {
-				// TODO Auto-generated method stub
-				CliSocial clisocial = new CliSocial(0,txtuserr.getText(),txtprovr.getText(), 0);
+				if (!verificarCampoIdVacio(txtidr)) return;
+
+				CliSocial clisocial = new CliSocial(0, txtuserr.getText(), txtprovr.getText(), 0);
 				ICliSocial log = new LCliSocial();
 				log.guardar(clisocial);
 				JOptionPane.showMessageDialog(null, "Datos guardados");
 			}
+
 		});
 		
 		// initialization load table
@@ -335,4 +338,17 @@ public class FManCliSocialMedia extends JFrame {
 		}
 		grilla_SocialCorreo.setModel(model);
 	}
+	
+	private boolean verificarCampoIdVacio(JTextField campo) {
+		if (!campo.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null,
+				"El campo ID se autogenera. Déjalo vacío.",
+				"Aviso",
+				JOptionPane.INFORMATION_MESSAGE);
+			campo.setText(""); // Limpiar el campo si es necesario
+			return false;
+		}
+		return true;
+	}
+
 }

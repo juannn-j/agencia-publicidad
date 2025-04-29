@@ -18,18 +18,30 @@ public class LPubCliente implements IPubCliente {
 	
 	@Override
 	public void guardar(PubCliente pubcliente) throws SQLException {
-		// TODO Auto-generated method stub
-		db = new DB();
-		cn = db.conectar();
-		String sql = "insert into pub_emp_cli (fecha, id_emp, id_cli, id_pub) values (?,?,?,?)";
-		ps = cn.prepareStatement(sql);
-		ps.setString(1, pubcliente.getFecha());
-		ps.setInt(2, pubcliente.getId_emp());
-		ps.setInt(3, pubcliente.getId_cli());
-		ps.setInt(4, pubcliente.getId_pub());
-		ps.execute();
-		cn.close();
+	    String sql = "INSERT INTO pub_emp_cli (fecha, id_emp, id_cli, id_pub) VALUES (?, ?, ?, ?)";
+	    if (pubcliente.getId_emp() <= 0 || pubcliente.getId_cli() <= 0 || pubcliente.getId_pub() <= 0) {
+	        throw new SQLException("Error: El ID de empleado, cliente o publicidad no puede ser cero o negativo.");
+	    }
+
+	    if (pubcliente.getFecha() == null) {
+	        throw new SQLException("Error: La fecha no puede ser nula.");
+	    }
+
+	    try (Connection cn = new DB().conectar();
+	         PreparedStatement ps = cn.prepareStatement(sql)) {
+
+	        ps.setDate(1, new java.sql.Date(pubcliente.getFecha().getTime()));
+	        ps.setInt(2, pubcliente.getId_emp());
+	        ps.setInt(3, pubcliente.getId_cli());
+	        ps.setInt(4, pubcliente.getId_pub());
+
+	        ps.executeUpdate();
+	    } catch (SQLException e) {
+	        throw new SQLException("Error al guardar PubCliente", e);
+	    }
 	}
+
+
 
 	@Override
 	public void modificar(PubCliente pubcliente) throws SQLException {
@@ -38,7 +50,7 @@ public class LPubCliente implements IPubCliente {
 		cn = db.conectar();
 		String sql = "update pub_emp_cli set fecha=?, id_emp=?, id_cli=?, id_pub=? where id_pub_cli=?";
 		ps = cn.prepareStatement(sql);
-		ps.setString(1, pubcliente.getFecha());
+		ps.setDate(1, new java.sql.Date(pubcliente.getFecha().getTime()));
 		ps.setInt(2, pubcliente.getId_emp());
 		ps.setInt(3, pubcliente.getId_cli());
 		ps.setInt(4, pubcliente.getId_pub());
