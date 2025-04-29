@@ -70,29 +70,32 @@ public class FLogin extends JFrame {
 		contentPane.add(lbliniciarsesion);
 		
 		txtusuario = new JTextField();
-		txtusuario.setBounds(256, 128, 86, 20);
+		txtusuario.setBounds(196, 128, 207, 20);
 		contentPane.add(txtusuario);
 		txtusuario.setColumns(10);
 		
 		pwdcont = new JPasswordField();
-		pwdcont.setBounds(256, 189, 86, 20);
+		pwdcont.setBounds(196, 189, 207, 20);
 		contentPane.add(pwdcont);
 		
 		JLabel lblusuario = new JLabel("Usuario");
-		lblusuario.setBounds(196, 98, 46, 14);
+		lblusuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblusuario.setBounds(196, 103, 57, 14);
 		contentPane.add(lblusuario);
 		
 		JLabel lblcont = new JLabel("Contraseña");
-		lblcont.setBounds(196, 164, 46, 14);
+		lblcont.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblcont.setBounds(196, 164, 83, 14);
 		contentPane.add(lblcont);
 		
 		JButton btningresar = new JButton("Ingresar");
+		btningresar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btningresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				validarUsuario();
 			}
 		});
-		btningresar.setBounds(253, 264, 89, 23);
+		btningresar.setBounds(248, 267, 108, 39);
 		contentPane.add(btningresar);
 	}
 	
