@@ -26,7 +26,7 @@ public class LCliente implements ICliente{
 		ps = cn.prepareStatement(sql);
 		ps.setString(1, cliente.getNombre());
 		ps.setString(2, cliente.getApellido());
-		ps.setString(3, cliente.getBirthDate());
+		ps.setDate(3, new java.sql.Date(cliente.getBirthDate().getTime()));
 		ps.setString(4, cliente.getTelefono());
 		ps.setString(5, cliente.getDireccion());
 		ps.setString(6, cliente.getDni());
@@ -45,7 +45,7 @@ public class LCliente implements ICliente{
 		ps = cn.prepareStatement(sql);
 		ps.setString(1, cliente.getNombre());
 		ps.setString(2, cliente.getApellido());
-		ps.setString(3, cliente.getBirthDate());
+		ps.setDate(3, new java.sql.Date(cliente.getBirthDate().getTime()));
 		ps.setString(4, cliente.getTelefono());
 		ps.setString(5, cliente.getDireccion());
 		ps.setString(6, cliente.getDni());
@@ -81,7 +81,7 @@ public class LCliente implements ICliente{
 			cli.setId_cli(rs.getInt(1));
 			cli.setNombre(rs.getString(2));
 			cli.setApellido(rs.getString(3));
-			cli.setBirthDate(rs.getString(4));
+			cli.setBirthDate(rs.getDate(4));
 			cli.setTelefono(rs.getString(5));
 			cli.setDireccion(rs.getString(6));
 			cli.setDni(rs.getString(7));

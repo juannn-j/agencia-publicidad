@@ -1,11 +1,13 @@
 package entidades;
 
+import java.util.Date;
+
 public class Cliente {
 	// entidad para el crud clientes
 	private int id_cli;
 	private String nombre;
 	private String apellido;
-	private String birthdate;
+	private Date birthdate;
 	private String telefono;
 	private String direccion;
 	private String dni;
@@ -17,7 +19,7 @@ public class Cliente {
 	}
 
 	public Cliente(int id_cli, String nombre, String apellido, String telefono, String direccion, String dni,
-			String sexo, String birthdate, String socialmedia, String gusto) {
+			String sexo, Date birthdate, String socialmedia, String gusto) {
 		super();
 		this.id_cli = id_cli;
 		this.nombre = nombre;
@@ -87,11 +89,11 @@ public class Cliente {
 		this.sexo = sexo;
 	}
 
-	public String getBirthDate() {
+	public java.util.Date getBirthDate() {
 		return birthdate;
 	}
 
-	public void setBirthDate(String birthdate) {
+	public void setBirthDate( java.util.Date birthdate) {
 		this.birthdate = birthdate;
 	}
 	

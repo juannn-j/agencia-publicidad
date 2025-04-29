@@ -5,6 +5,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -164,7 +167,7 @@ public class FManCliente extends JFrame {
 		contentPane.add(scrollPane);
 		
 		// create a table and selection listener
-		grilla_clientes = new JTable();
+		/*grilla_clientes = new JTable();
 		scrollPane.setViewportView(grilla_clientes);
 		grilla_clientes.getSelectionModel().addListSelectionListener(e -> {
 			if (!e.getValueIsAdjusting() && grilla_clientes.getSelectedRow() != -1) {
@@ -172,13 +175,24 @@ public class FManCliente extends JFrame {
 				txtid.setText(grilla_clientes.getValueAt(fila, 0).toString());
 				txtnombres.setText(grilla_clientes.getValueAt(fila, 1).toString());
 				txtapellidos.setText(grilla_clientes.getValueAt(fila, 2).toString());
-				dcbirthdate.setToolTipText(grilla_clientes.getValueAt(fila, 3).toString());
+				dcbirthdate.setText(grilla_clientes.getValueAt(fila, 3).toString());
 				txttelefono.setText(grilla_clientes.getValueAt(fila, 4).toString());
 				txtdirec.setText(grilla_clientes.getValueAt(fila, 5).toString());
 				txtdni.setText(grilla_clientes.getValueAt(fila, 6).toString());
 				txtsexo.setText(grilla_clientes.getValueAt(fila, 7).toString());
 				txtgusto.setText(grilla_clientes.getValueAt(fila, 8).toString());
 			}
+		});
+		*/
+		
+		grilla_clientes = new JTable();
+		scrollPane.setViewportView(grilla_clientes);
+
+		grilla_clientes.getSelectionModel().addListSelectionListener(e -> {
+		    if (!e.getValueIsAdjusting() && grilla_clientes.getSelectedRow() != -1) {
+		        int fila = grilla_clientes.getSelectedRow();
+		        cargarDatosFila(fila);
+		    }
 		});
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -242,35 +256,65 @@ public class FManCliente extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	private void guardarCliente() throws SQLException {
-		Cliente cliente = new Cliente(0,
-				txtid.getText(),
-				txtnombres.getText(),
-				txtapellidos.getText(),
-				dcbirthdate.getToolTipText(),
-				txttelefono.getText(),
-				txtdirec.getText(),
-				txtdni.getText(),
-				txtsexo.getText(),
-				txtgusto.getText());
-		ICliente log = new LCliente();
-		log.guardar(cliente);
-		JOptionPane.showMessageDialog(null, "Datos guardados");
+	
+	private void cargarDatosFila(int fila) {
+	    txtid.setText(grilla_clientes.getValueAt(fila, 0).toString());
+	    txtnombres.setText(grilla_clientes.getValueAt(fila, 1).toString());
+	    txtapellidos.setText(grilla_clientes.getValueAt(fila, 2).toString());
+
+	    // Conversión segura de la fecha
+	    String fechaTexto = grilla_clientes.getValueAt(fila, 3).toString();
+	    try {
+	        java.util.Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(fechaTexto);
+	        dcbirthdate.setDate(fecha);
+	    } catch (ParseException ex) {
+	        ex.printStackTrace(); // Log de error. También podrías notificar al usuario.
+	    }
+
+	    txttelefono.setText(grilla_clientes.getValueAt(fila, 4).toString());
+	    txtdirec.setText(grilla_clientes.getValueAt(fila, 5).toString());
+	    txtdni.setText(grilla_clientes.getValueAt(fila, 6).toString());
+	    txtsexo.setText(grilla_clientes.getValueAt(fila, 7).toString());
+	    txtgusto.setText(grilla_clientes.getValueAt(fila, 8).toString());
 	}
 
+	private void guardarCliente() throws SQLException {
+		Cliente cli = new Cliente();
+		// obligar no poner el campo con un valor para el id
+		if (!txtid.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null,
+				"El campo ID se autogenera. Déjalo vacío.",
+				"Aviso",
+				JOptionPane.INFORMATION_MESSAGE);
+			txtid.setText(""); // Limpiar el campo si es necesario
+		}
+		cli.setNombre(txtnombres.getText());
+		cli.setApellido(txtapellidos.getText());
+		cli.setBirthDate(dcbirthdate.getDate());
+		cli.setTelefono(txttelefono.getText());
+		cli.setDireccion(txtdirec.getText());
+		cli.setDni(txtdni.getText());
+		cli.setSexo(txtsexo.getText());
+		cli.setGusto(txtgusto.getText());
+		
+		ICliente logica = new LCliente();
+		logica.guardar(cli);
+		JOptionPane.showMessageDialog(this, "Cliente guardado exitosamente.");
+	}
+
+
 	private void modificarCliente() throws SQLException {
-		Cliente cliente = new Cliente(0,
-				txtid.getText(),
-				txtnombres.getText(),
-				txtapellidos.getText(),
-				dcbirthdate.getToolTipText(),
-				txttelefono.getText(),
-				txtdirec.getText(),
-				txtdni.getText(),
-				txtsexo.getText(),
-				txtgusto.getText());
+		Cliente cli = new Cliente();
+		cli.setNombre(txtnombres.getText());
+		cli.setApellido(txtapellidos.getText());
+		cli.setBirthDate(dcbirthdate.getDate());
+		cli.setTelefono(txttelefono.getText());
+		cli.setDireccion(txtdirec.getText());
+		cli.setDni(txtdni.getText());
+		cli.setSexo(txtsexo.getText());
+		cli.setGusto(txtgusto.getText());
 		ICliente log = new LCliente();
-		log.modificar(cliente);
+		log.modificar(cli);
 		JOptionPane.showMessageDialog(null, "Datos modificados");
 	}
 
@@ -286,23 +330,34 @@ public class FManCliente extends JFrame {
 	}
 
 	private void cargarClientes() throws SQLException {
-		DefaultTableModel model = new DefaultTableModel(null,
-				new String[]{"ID", "NOMBRE", "APELLIDO", "FECHA DE NACIMIENTO", "TELEFONO", "DIRECCION", "DNI", "SEXO", "GUSTO"});
-		ICliente log = new LCliente();
-		List<Cliente> clientes = log.cargar();
-		for (Cliente cliente : clientes) {
+		ICliente logica = new LCliente();
+		List<Cliente> lista = logica.cargar();
+
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("ID");
+		model.addColumn("Nombre");
+		model.addColumn("Apellido");
+		model.addColumn("Nacimiento");
+		model.addColumn("Teléfono");
+		model.addColumn("Dirección");
+		model.addColumn("DNI");
+		model.addColumn("Sexo");
+		model.addColumn("Gusto");
+
+		for (Cliente cli : lista) {
 			model.addRow(new Object[]{
-					cliente.getId_cli(),
-					cliente.getNombre(),
-					cliente.getApellido(),
-					cliente.getBirthDate(),
-					cliente.getTelefono(),
-					cliente.getDireccion(),
-					cliente.getDni(),
-					cliente.getSexo(),
-					cliente.getGusto()
+				cli.getId_cli(),
+				cli.getNombre(),
+				cli.getApellido(),
+				cli.getBirthDate(),
+				cli.getTelefono(),
+				cli.getDireccion(),
+				cli.getDni(),
+				cli.getSexo(),
+				cli.getGusto()
 			});
 		}
 		grilla_clientes.setModel(model);
 	}
+
 }
