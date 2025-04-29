@@ -31,12 +31,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
+import com.toedter.calendar.JDateChooser;
+import java.text.SimpleDateFormat;
+
 public class FManPublicidad extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtid;
-	private JTextField txtfecha;
+	private JDateChooser dcfecha;
 	private JTextField txtemp;
 	private JTextField txtcli;
 	private JTextField txtpub;
@@ -98,27 +101,28 @@ public class FManPublicidad extends JFrame {
 		contentPane.add(lblPublicidad);
 		
 		txtid = new JTextField();
-		txtid.setBounds(84, 40, 64, 20);
+		txtid.setBounds(84, 40, 76, 20);
 		contentPane.add(txtid);
 		txtid.setColumns(10);
 		
-		txtfecha = new JTextField();
-		txtfecha.setBounds(84, 66, 64, 20);
-		contentPane.add(txtfecha);
-		txtfecha.setColumns(10);
+		dcfecha = new JDateChooser();
+		dcfecha.setBounds(84, 66, 76, 20); // tamaño más amplio y legible
+		dcfecha.setDateFormatString("yyyy-MM-dd"); // formato compatible con SQL
+		contentPane.add(dcfecha);
+
 		
 		txtemp = new JTextField();
-		txtemp.setBounds(84, 94, 64, 20);
+		txtemp.setBounds(84, 94, 76, 20);
 		contentPane.add(txtemp);
 		txtemp.setColumns(10);
 		
 		txtcli = new JTextField();
-		txtcli.setBounds(84, 122, 64, 20);
+		txtcli.setBounds(84, 122, 76, 20);
 		contentPane.add(txtcli);
 		txtcli.setColumns(10);
 		
 		txtpub = new JTextField();
-		txtpub.setBounds(84, 150, 64, 20);
+		txtpub.setBounds(84, 150, 76, 20);
 		contentPane.add(txtpub);
 		txtpub.setColumns(10);
 		
@@ -163,7 +167,8 @@ public class FManPublicidad extends JFrame {
 
 			private void guardarPubEmpCli() throws SQLException {
 				// TODO Auto-generated method stub
-				PubCliente pubcliente = new PubCliente(0, txtfecha.getText(), 0,0,0);
+				String fechaStr = new SimpleDateFormat("yyyy-MM-dd").format(dcfecha.getDate());
+				PubCliente pubcliente = new PubCliente(0, fechaStr, 0, 0, 0);
 				IPubCliente log = new LPubCliente();
 				log.guardar(pubcliente);
 				JOptionPane.showMessageDialog(null, "Datos guardados");
@@ -182,7 +187,8 @@ public class FManPublicidad extends JFrame {
 
 			private void modificarPubEmpCli() throws SQLException {
 				// TODO Auto-generated method stub
-				PubCliente pubcliente = new PubCliente(0, txtfecha.getText(), 0,0,0);
+				String fechaStr = new SimpleDateFormat("yyyy-MM-dd").format(dcfecha.getDate());
+				PubCliente pubcliente = new PubCliente(0, fechaStr, 0, 0, 0);
 				IPubCliente log = new LPubCliente();
 				log.guardar(pubcliente);
 				JOptionPane.showMessageDialog(null, "Datos modificados");

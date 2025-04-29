@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.toedter.calendar.JDateChooser;
+
 import entidades.Cliente;
 import interfaces.ICliente;
 import logica.LCliente;
@@ -30,7 +32,7 @@ public class FManCliente extends JFrame {
 	private JTextField txtid;
 	private JTextField txtnombres;
 	private JTextField txtapellidos;
-	private JTextField txtbirthdate;
+	private JDateChooser dcbirthdate;
 	private JTextField txttelefono;
 	private JTextField txtdirec;
 	private JTextField txtdni;
@@ -127,10 +129,10 @@ public class FManCliente extends JFrame {
 		txtapellidos.setBounds(82, 66, 125, 20);
 		contentPane.add(txtapellidos);
 		
-		txtbirthdate = new JTextField();
-		txtbirthdate.setColumns(10);
-		txtbirthdate.setBounds(322, 12, 125, 20);
-		contentPane.add(txtbirthdate);
+		dcbirthdate = new JDateChooser();
+		dcbirthdate.setBounds(322, 8, 125, 20);
+		dcbirthdate.setDateFormatString("yyyy-MM-dd");
+		contentPane.add(dcbirthdate);
 		
 		txttelefono = new JTextField();
 		txttelefono.setColumns(10);
@@ -170,7 +172,7 @@ public class FManCliente extends JFrame {
 				txtid.setText(grilla_clientes.getValueAt(fila, 0).toString());
 				txtnombres.setText(grilla_clientes.getValueAt(fila, 1).toString());
 				txtapellidos.setText(grilla_clientes.getValueAt(fila, 2).toString());
-				txtbirthdate.setText(grilla_clientes.getValueAt(fila, 3).toString());
+				dcbirthdate.setToolTipText(grilla_clientes.getValueAt(fila, 3).toString());
 				txttelefono.setText(grilla_clientes.getValueAt(fila, 4).toString());
 				txtdirec.setText(grilla_clientes.getValueAt(fila, 5).toString());
 				txtdni.setText(grilla_clientes.getValueAt(fila, 6).toString());
@@ -245,7 +247,7 @@ public class FManCliente extends JFrame {
 				txtid.getText(),
 				txtnombres.getText(),
 				txtapellidos.getText(),
-				txtbirthdate.getText(),
+				dcbirthdate.getToolTipText(),
 				txttelefono.getText(),
 				txtdirec.getText(),
 				txtdni.getText(),
@@ -261,7 +263,7 @@ public class FManCliente extends JFrame {
 				txtid.getText(),
 				txtnombres.getText(),
 				txtapellidos.getText(),
-				txtbirthdate.getText(),
+				dcbirthdate.getToolTipText(),
 				txttelefono.getText(),
 				txtdirec.getText(),
 				txtdni.getText(),
