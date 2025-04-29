@@ -4,8 +4,6 @@ public class Empleado {
 	// Entidad Empleado para mostrar
 	private int id_emp;
 	private String nombre;
-	private String telefono;
-	private String dni;
 	private String usuario;
 	private String passwd;
 	
@@ -13,12 +11,10 @@ public class Empleado {
 		super();
 	}
 
-	public Empleado(int id_emp, String nombre, String telefono, String dni, String usuario, String passwd) {
+	public Empleado(int id_emp, String nombre, String usuario, String passwd) {
 		super();
 		this.id_emp = id_emp;
 		this.nombre = nombre;
-		this.telefono = telefono;
-		this.dni = dni;
 		this.usuario = usuario;
 		this.passwd = passwd;
 	}
@@ -39,22 +35,6 @@ public class Empleado {
 		this.nombre = nombre;
 	}
 
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
 	public String getUsuario() {
 		return usuario;
 	}
@@ -70,6 +50,5 @@ public class Empleado {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
-	
 	
 }
