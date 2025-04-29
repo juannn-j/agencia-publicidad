@@ -35,8 +35,9 @@ public class FMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public FMenu() {
+		setTitle("Menu Agencia de Publicidad");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 690, 396);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -44,7 +45,7 @@ public class FMenu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnSalir = new JButton("SIGN OUT");
-		btnSalir.setBounds(537, 11, 89, 23);
+		btnSalir.setBounds(349, 265, 89, 23);
 		contentPane.add(btnSalir);
 		
 		JButton btnMantCliente = new JButton("MANTENIMIETO DE CLIENTES");
@@ -57,10 +58,10 @@ public class FMenu extends JFrame {
 				dispose();
 			}
 		});
-		btnMantCliente.setBounds(45, 45, 213, 54);
+		btnMantCliente.setBounds(12, 22, 213, 117);
 		contentPane.add(btnMantCliente);
 		
-		JButton btnMantCliSocial = new JButton("ADMINISTRAR RED SOCIAL");
+		JButton btnMantCliSocial = new JButton("ADMINISTRAR SOCIAL MEDIA");
 		btnMantCliSocial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FManCliSocialMedia cliente=new FManCliSocialMedia();
@@ -68,7 +69,7 @@ public class FMenu extends JFrame {
 				dispose();
 			}
 		});
-		btnMantCliSocial.setBounds(45, 110, 213, 54);
+		btnMantCliSocial.setBounds(12, 136, 213, 117);
 		contentPane.add(btnMantCliSocial);
 		
 		JButton btnMantPublicidad = new JButton("ADMINISTRAR PUBLICIDAD");
@@ -79,7 +80,7 @@ public class FMenu extends JFrame {
 				dispose();
 			}
 		});
-		btnMantPublicidad.setBounds(45, 191, 213, 54);
+		btnMantPublicidad.setBounds(225, 22, 213, 117);
 		contentPane.add(btnMantPublicidad);
 		
 		JButton btnMantReporte = new JButton("GENERAR REPORTE");
@@ -90,11 +91,8 @@ public class FMenu extends JFrame {
 				dispose();
 			}
 		});
-		btnMantReporte.setBounds(402, 222, 146, 54);
+		btnMantReporte.setBounds(225, 136, 213, 117);
 		contentPane.add(btnMantReporte);
 	}
 
-	public FMenu(int idEmpleado, String nombreEmpleado) {
-		// TODO Auto-generated constructor stub
-	}
 }

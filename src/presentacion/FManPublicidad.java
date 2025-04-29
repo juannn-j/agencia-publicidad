@@ -216,6 +216,16 @@ public class FManPublicidad extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				FMenu fmenu = new FMenu();
+				fmenu.setVisible(true);
+				dispose();
+			}
+		});
 		
 		try { CargarPubCli(); CargarClientes2(); CargarPublicidades(); } 
 		catch (SQLException e) { e.printStackTrace(); }

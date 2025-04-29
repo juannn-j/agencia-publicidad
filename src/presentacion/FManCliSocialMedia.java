@@ -236,6 +236,16 @@ public class FManCliSocialMedia extends JFrame {
 		btnAtras.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				FMenu fmenu = new FMenu();
+				fmenu.setVisible(true);
+				dispose();
+			}
+		});
 		
 		JButton btnEliminarR = new JButton("Eliminar");
 		btnEliminarR.setFont(new Font("Iosevka", Font.PLAIN, 14));

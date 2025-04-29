@@ -2,6 +2,8 @@ package presentacion;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -220,6 +222,16 @@ public class FManCliente extends JFrame {
 		btnAtras.setFont(new Font("Iosevka", Font.PLAIN, 14));
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
+		btnAtras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				FMenu fmenu = new FMenu();
+				fmenu.setVisible(true);
+				dispose();
+			}
+		});
 		
 		// initialization load table
 		try {
