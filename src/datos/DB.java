@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DB {
 	private String url = "jdbc:postgresql://lo  calhost/agenpub";
 	private String user = "postgres";
-	private String password = "1234";
+	private String password = "123";
 	
 	public Connection conectar() throws SQLException {
 		Connection cn = DriverManager.getConnection(url,user,password);
