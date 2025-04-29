@@ -1,39 +1,38 @@
--- Crear tablas
 CREATE TABLE EMPLEADO (
     id_emp SERIAL PRIMARY KEY,
-    nombre VARCHAR(100),
-    telefono VARCHAR(20),
-    dni VARCHAR(20),
-    usuario VARCHAR(50),
-    passwd VARCHAR(100)
+    nombre VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    dni VARCHAR(20) NOT NULL,
+    usuario VARCHAR(50) NOT NULL,
+    passwd VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE PUBLICIDAD (
     id_pub SERIAL PRIMARY KEY,
-    descp TEXT,
-    tipo VARCHAR(50),
-    contacto INT,
-    imagen TEXT
+    descp TEXT NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    contacto INT NOT NULL,
+    imagen TEXT NOT NULL
 );
 
 CREATE TABLE CLIENTE (
     id_cli SERIAL PRIMARY KEY,
-    nombre VARCHAR(100),
-    apellido VARCHAR(100),
-    birthdate DATE,
-    telefono VARCHAR(20),
-    direccion TEXT,
-    dni VARCHAR(20),
-    sexo VARCHAR(10),
-    gusto TEXT
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    birthdate DATE NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    direccion TEXT NOT NULL,
+    dni VARCHAR(20) NOT NULL,
+    sexo VARCHAR(10) NOT NULL,
+    gusto TEXT NOT NULL
 );
 
 CREATE TABLE PUB_EMP_CLI (
     id_pub_cli SERIAL PRIMARY KEY,
-    fecha DATE,
-    id_emp INT,
-    id_cli INT,
-    id_pub INT,
+    fecha DATE NOT NULL,
+    id_emp INT NOT NULL,
+    id_cli INT NOT NULL,
+    id_pub INT NOT NULL,
     CONSTRAINT fk_pubempcli_empleado FOREIGN KEY (id_emp) REFERENCES EMPLEADO(id_emp),
     CONSTRAINT fk_pubempcli_cliente FOREIGN KEY (id_cli) REFERENCES CLIENTE(id_cli),
     CONSTRAINT fk_pubempcli_publicidad FOREIGN KEY (id_pub) REFERENCES PUBLICIDAD(id_pub)
@@ -41,17 +40,17 @@ CREATE TABLE PUB_EMP_CLI (
 
 CREATE TABLE CLIENTE_CORREO (
     id_cli_cor SERIAL PRIMARY KEY,
-    correo VARCHAR(100),
-    proveedor VARCHAR(50),
-    id_cli INT,
+    correo VARCHAR(100) NOT NULL,
+    proveedor VARCHAR(50) NOT NULL,
+    id_cli INT NOT NULL,
     CONSTRAINT fk_clientecorreo_cliente FOREIGN KEY (id_cli) REFERENCES CLIENTE(id_cli)
 );
 
 CREATE TABLE CLIENTE_SOCIAL (
     id_cli_soc SERIAL PRIMARY KEY,
-    usuario VARCHAR(100),
-    proveedor VARCHAR(50),
-    id_cli INT,
+    usuario VARCHAR(100) NOT NULL,
+    proveedor VARCHAR(50) NOT NULL,
+    id_cli INT NOT NULL,
     CONSTRAINT fk_clientesocial_cliente FOREIGN KEY (id_cli) REFERENCES CLIENTE(id_cli)
 );
 
