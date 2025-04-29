@@ -62,12 +62,12 @@ public class FEmpLogin extends JFrame {
 		contentPane.add(lblContrase);
 		
 		txtuser = new JTextField();
-		txtuser.setBounds(244, 101, 64, 20);
+		txtuser.setBounds(214, 101, 94, 20);
 		contentPane.add(txtuser);
 		txtuser.setColumns(10);
 		
 		txtpass = new JPasswordField();
-		txtpass.setBounds(244, 129, 64, 20);
+		txtpass.setBounds(214, 129, 94, 20);
 		contentPane.add(txtpass);
 		txtpass.setColumns(10);
 		
