@@ -1,6 +1,7 @@
 package entidades;
 
 public class CliSocial {
+	// entidad para registrar redes sociales
 	private int id_cli_soc;
 	private String user;
 	private String proveedor;

@@ -1,6 +1,7 @@
 package entidades;
 
 public class Cliente {
+	// entidad para el crud clientes
 	private int id_cli;
 	private String nombre;
 	private String apellido;

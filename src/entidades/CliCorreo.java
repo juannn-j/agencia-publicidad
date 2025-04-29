@@ -1,6 +1,7 @@
 package entidades;
 
 public class CliCorreo {
+	// entidad para registrar correos
 	private int id_cli_cor;
 	private String correo;
 	private String proveedor;
@@ -9,7 +10,7 @@ public class CliCorreo {
 	public CliCorreo() {
 		super();
 	}
-
+	
 	public CliCorreo(int id_cli_cor, String correo, String proveedor, int id_cli) {
 		super();
 		this.id_cli_cor = id_cli_cor;
