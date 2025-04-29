@@ -1,6 +1,8 @@
 package presentacion;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,11 +12,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import entidades.ReporteEmpCli;
-import entidades.ReportePubCli;
+import entidades.ReportePubCli2;
 import interfaces.IReporteEmpCli;
-import interfaces.IReportePubCli;
+import interfaces.IReportePubCli2;
 import logica.LReporteEmpCli;
-import logica.LReportePubCli;
+import logica.LReportePubCli2;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -90,6 +92,18 @@ public class FReportesClientes extends JFrame {
 		JButton btnselectemp = new JButton("Select");
 		btnselectemp.setBounds(88, 30, 94, 26);
 		contentPane.add(btnselectemp);
+		btnselectemp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					CargarEmpCli();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		txtpubclinom = new JTextField();
 		txtpubclinom.setBounds(356, 36, 64, 20);
@@ -99,12 +113,24 @@ public class FReportesClientes extends JFrame {
 		JButton btnselectpub = new JButton("Select");
 		btnselectpub.setBounds(432, 30, 94, 26);
 		contentPane.add(btnselectpub);
+		btnselectpub.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					CargarPubCli2();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(594, 462, 94, 26);
 		contentPane.add(btnAtras);
 		
-		try { CargarPubCli(); CargarEmpCli(); CargarPubCli(); } 
+		try { CargarEmpCli(); CargarPubCli2(); } 
 		catch (SQLException e) { e.printStackTrace(); }
 	}
 	
@@ -113,33 +139,34 @@ public class FReportesClientes extends JFrame {
 		DefaultTableModel model = new DefaultTableModel(null,
 				new String[] { "EMP ID", "EMPLEADO", "CLIENTE ID", "CLIENTE", "FECHA" });
 		IReporteEmpCli log = new LReporteEmpCli();
-		List<ReporteEmpCli> repempclis = log.cargar();
+		String parametro = txtempclinom.getText();
+		List<ReporteEmpCli> repempclis = log.cargar(parametro);
 		for (ReporteEmpCli repemcli : repempclis) {
 			model.addRow(new Object[] {
 					repemcli.getId_emp(),
 					repemcli.getNombre_emp(),
 					repemcli.getId_cli(),
 					repemcli.getNombre_cli(),
-					repemcli.getFecha(),
-					
+					repemcli.getFecha()
 			});
 		}
 		grilla_empcli.setModel(model);
 	}
 
-	private void CargarPubCli() throws SQLException {
+	private void CargarPubCli2() throws SQLException {
 		DefaultTableModel model = new DefaultTableModel(null,
 				new String[] { "CLIENTE ID", "CLIENTE", "PUB ID", "DESCRIPCION", "TIPO", "FECHA" });
-		IReportePubCli log = new LReportePubCli();
-		List<ReportePubCli> reppubclis = log.cargar();
-		for (ReportePubCli reppbcs : reppubclis) {
+		IReportePubCli2 log = new LReportePubCli2();
+		String param2 = txtpubclinom.getText();
+		List<ReportePubCli2> reppubclis2 = log.cargar(param2);
+		for (ReportePubCli2 reppbcs2 : reppubclis2) {
 			model.addRow(new Object[] {
-					reppbcs.getId_cli(),
-					reppbcs.getNombre_cli(),
-					reppbcs.getId_pub(),
-					reppbcs.getDesc_pub(),
-					reppbcs.getTipo_pub(),
-					reppbcs.getFecha(),
+					reppbcs2.getId_cli(),
+					reppbcs2.getNombre_cli(),
+					reppbcs2.getId_pub(),
+					reppbcs2.getDesc_pub(),
+					reppbcs2.getTipo_pub(),
+					reppbcs2.getFecha(),
 			});
 		}
 		grilla_pubcli.setModel(model);

@@ -6,5 +6,5 @@ import java.util.List;
 import entidades.ReporteEmpCli;
 
 public interface IReporteEmpCli {
-	List<ReporteEmpCli> cargar() throws SQLException;
+	List<ReporteEmpCli> cargar(String nombre_emp) throws SQLException;
 }

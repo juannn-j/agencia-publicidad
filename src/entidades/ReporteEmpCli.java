@@ -59,5 +59,9 @@ public class ReporteEmpCli {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.nombre_emp;
+	}
 }
