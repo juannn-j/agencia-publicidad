@@ -1,11 +1,13 @@
 # Trabajo final: Agencia de publicidad
 
-## Planteamiento
-
 > Integrantes:
 > - Adam
 > - Andy
 > - Huamanga
+
+## Planteamiento
+
+![image](assets/trabajo_final.png)
 
 ## Bocetos
 
